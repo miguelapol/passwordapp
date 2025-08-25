@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PasswordApp</string>
+    <!--Drawer menu-->
+    <string name="Opcion_Todas">Todas</string>
+    <string name="Opcion_Ajustes">Ajustes</string>
+    <string name="Opcion_Salir">Salir</string>
+
+
 </resources>
