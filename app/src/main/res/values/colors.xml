@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--Color app-->
+    <color name="colorPrimary">#006db3</color>
+    <color name="colorPrimaryDark">#006db3</color>
+    <color name="colorAccent">#006db3</color>
 </resources>
