@@ -8,6 +8,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
+    boolean DoubleToqueSalir=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,5 +59,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawer.closeDrawer(GravityCompat.START);
         return  true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(DoubleToqueSalir){
+            super.onBackPressed();
+            Toast.makeText(this,"Saliste de la aplicacion",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        /*precionar una vez en el boton de retroceso*/
+        this.DoubleToqueSalir=true;
+        Toast.makeText(this,"Presione 2 veces para salir",Toast.LENGTH_SHORT).show();
+
+        /*esto permitira ejecutar codigo en cierto tiempo determinado*/
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DoubleToqueSalir=false;
+            }
+        },2000);
+        super.onBackPressed();
     }
 }
