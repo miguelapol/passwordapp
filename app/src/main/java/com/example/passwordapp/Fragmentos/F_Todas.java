@@ -3,18 +3,32 @@ package com.example.passwordapp.Fragmentos;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.passwordapp.Adaptador.Adaptador_password;
+import com.example.passwordapp.BaseDeDatos.BDHelper;
+import com.example.passwordapp.BaseDeDatos.Constants;
 import com.example.passwordapp.OpcionesPassword.Agregar_Password;
 import com.example.passwordapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class F_Todas extends Fragment {
+
+    BDHelper bdHelper;
+    //el recycler view se inicializa
+    RecyclerView recyclerView_List_Registros;
     FloatingActionButton FAB_AgregarPassword;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,7 +37,10 @@ public class F_Todas extends Fragment {
 
        //AQUI TENEMOS QUE INICIALIZAR EL BOTON
         FAB_AgregarPassword= view.findViewById(R.id.FAB_AgregarPassword);
-
+        recyclerView_List_Registros=view.findViewById(R.id.recyclerView_List_Registros);
+        //con esto le pasamos el contexto de la actividad
+        bdHelper=new BDHelper(getActivity());
+        CargarRegistros();
         //agregamos un evento para que si da click entonces lo redireccion a la otra vista
         FAB_AgregarPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +50,33 @@ public class F_Todas extends Fragment {
         });
 
        return  view;
+    }
+
+    private void CargarRegistros() {
+        Adaptador_password adaptador_password=new Adaptador_password(getActivity(),bdHelper.ObtenerTodosRegistros(
+                Constants.C_TITULO+" ASC"));
+        recyclerView_List_Registros.setAdapter(adaptador_password);
+
+    }
+
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater){
+        inflater.inflate(R.menu.menu_fragmento_todos,menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.Numeros_registros){
+            Toast.makeText(getActivity(), "Numero de registros: "+bdHelper.ObtenerCantidadRegistros(), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
     }
 }
