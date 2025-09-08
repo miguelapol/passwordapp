@@ -21,4 +21,14 @@
     <string name="EtNota">Nota</string>
     <!--Menu agregar password-->
     <string name="GuardarPassword">Guardar</string>
+    <!--Item password-->
+    <string name="Item_titulo">Titulo</string>
+    <string name="Item_cuenta">Cuenta</string>
+    <string name="Item_nombre_usuario">Nombre de usuario</string>
+    <string name="Item_password">Contraseña</string>
+    <string name="Item_sitio_web">Sitio Web</string>
+    <string name="Item_nota">Nota</string>
+
+    <!--Menu fragmento Todas-->
+    <string name="Numeros_registros">Numero de registros</string>">
 </resources>

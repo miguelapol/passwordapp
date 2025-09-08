@@ -1,11 +1,17 @@
 package com.example.passwordapp.BaseDeDatos;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.passwordapp.Modelo.Password;
+
+import java.util.ArrayList;
 
 public class BDHelper extends SQLiteOpenHelper {
 
@@ -26,7 +32,7 @@ public class BDHelper extends SQLiteOpenHelper {
     }
 
     public long insertarRegistro(String titulo,String cuenta,String nombre_usuario,String password,
-                                String nota,String T_registro,String T_actualizacion){
+                                String sitio_web,String nota,String T_registro,String T_actualizacion){
                 SQLiteDatabase db =this.getWritableDatabase();
 
                 ContentValues  values = new ContentValues();
@@ -35,6 +41,8 @@ public class BDHelper extends SQLiteOpenHelper {
                 values.put(Constants.C_CUENTA,cuenta);
                 values.put(Constants.C_Nombre_USUARIO,nombre_usuario);
                 values.put(Constants.C_PASSWORD,password);
+                values.put(Constants.C_SITIO_WEB,sitio_web);
+                values.put(Constants.C_NOTA,nota);
                 values.put(Constants.C_TIEMPO_REGISTRO,T_registro);
                 values.put(Constants.C_TIEMPO_ACTUALIZACION,T_actualizacion);
 
@@ -44,5 +52,45 @@ public class BDHelper extends SQLiteOpenHelper {
                 /*Cerrar conexion*/
                 db.close();
                 return id;
+    }
+    public ArrayList<Password> ObtenerTodosRegistros(String orderby){
+        //ordenar
+        ArrayList<Password> passwordArrayList=new ArrayList<>();
+        String query="SELECT * FROM "+Constants.TABLE_NAME+" ORDER BY "+orderby;
+        SQLiteDatabase db=this.getReadableDatabase();
+        //cursor
+        Cursor cursor=db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                @SuppressLint("Range") Password modelo_password=new Password(
+                        ""+cursor.getInt(cursor.getColumnIndex(Constants.C_ID)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_TITULO)),
+                        "" +cursor.getString(cursor.getColumnIndex(Constants.C_CUENTA)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_Nombre_USUARIO)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_PASSWORD)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_SITIO_WEB)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_NOTA)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_TIEMPO_REGISTRO)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_TIEMPO_ACTUALIZACION))
+                    );
+
+
+                        passwordArrayList.add(modelo_password);
+            }while ( cursor.moveToNext());
+
+        }
+        db.close();
+        return passwordArrayList;
+    }
+
+    public int ObtenerCantidadRegistros(){
+        String query="SELECT * FROM "+Constants.TABLE_NAME;
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery(query,null);
+        int cantidad=cursor.getCount();
+        cursor.close();
+        return cantidad;
+
     }
 }

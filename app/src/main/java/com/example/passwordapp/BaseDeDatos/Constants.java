@@ -16,7 +16,7 @@ public class Constants {
     public  static final String C_Nombre_USUARIO="NOMBRE_USUARIO";
     public static  final String C_PASSWORD="PASSWORD";
     public static final String C_SITIO_WEB="SITIO_WEB";
-    public static final String C_NOTA="SITIO_WEB";
+    public static final String C_NOTA="NOTA";
     public static final String C_TIEMPO_REGISTRO="TIEMPO_REGISTRO";
     public static final String C_TIEMPO_ACTUALIZACION="TIEMPO_ACTUALIZACION";
 
@@ -27,11 +27,11 @@ public class Constants {
             +C_TITULO +" TEXT, "
             +C_CUENTA +" TEXT, "
             +C_Nombre_USUARIO+" TEXT, "
-            +C_PASSWORD+ " TEXT,"
-            +C_SITIO_WEB+ " TEXT,"
-            +C_NOTA+ " TEXT,"
+            +C_PASSWORD+ " TEXT, "
+            +C_SITIO_WEB+ " TEXT, "
+            +C_NOTA+ " TEXT, "
             +C_TIEMPO_REGISTRO+ " TEXT, "
-            +C_TIEMPO_ACTUALIZACION +" TEXT, "
+            +C_TIEMPO_ACTUALIZACION +" TEXT"
             + ")";
 
 }
