@@ -30,5 +30,31 @@
     <string name="Item_nota">Nota</string>
 
     <!--Menu fragmento Todas-->
-    <string name="Numeros_registros">Numero de registros</string>">
+    <string name="menu_Numeros_Registros">Numero de registros</string>">
+    <!--buscara registros-->
+    <string name="menu_Buscar_Registros">Buscar Registros</string>
+
+    <!--Cuadro de dialogos- numero de registros-->
+    <string name="TxtTotal">Total de registros</string>
+    <string name="Total">--</string>
+    <string name="btnEntendidoTotal">Entendido</string>
+    <!--Detalles registro-->
+    <string name="Txt_D_Titulo">Titulo: </string>
+    <string name="D_Titulo"> -- </string>
+    <string name="Txt_D_Cuenta">Cuenta: </string>
+    <string name="D_Cuenta"> -- </string>
+    <string name="Txt_D_Nombre_Usuario">Nombre de usuario: </string>
+    <string name="D_Nombre_Usuario"> -- </string>
+    <string name="Txt_D_Password">Contraseña: </string>
+    <string name="D_Password"> -- </string>
+    <string name="Txt_D_Sitio_Web">Sitio Web: </string>
+    <string name="D_Sitio_Web"> -- </string>
+    <string name="Txt_D_Nota">Nota: </string>
+    <string name="D_Nota"> -- </string>
+    <string name="Txt_D_Tiempo_Registro">Tiempo de registro: </string>
+    <string name="D_Tiempo_Registro"> -- </string>
+    <string name="Txt_D_Tiempo_Actualizacion">Tiempo de actualización: </string>
+    <string name="D_Tiempo_Actualizacion"> -- </string>
+
+
 </resources>
