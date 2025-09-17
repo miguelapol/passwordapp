@@ -1,6 +1,7 @@
 package com.example.passwordapp.Adaptador;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.passwordapp.Modelo.Password;
 import com.example.passwordapp.R;
+import com.example.passwordapp.detalle.Detalle_registro;
 
 import java.util.ArrayList;
 
@@ -50,13 +52,22 @@ public class Adaptador_password  extends RecyclerView.Adapter<Adaptador_password
 
         holder.tv_item_titulo.setText(titulo);
         holder.tv_item_cuenta.setText(cuenta);
+
+        //esto referencia cuando el usuario da click en el cuadro de texto
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Usuario Preciona el boton de mas opciones
+                //revisar el detalle del registro
+                /*enviamos el dato id ala actividad*/
+                Intent intent=new Intent(context, Detalle_registro.class);
+
+                intent.putExtra("id_registro",id);
+                context.startActivity(intent);
 
             }
         });
+        //esto referencia cuando el usuario presiona el boton de mas opciones los puntos
         holder.button_mas_opciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
