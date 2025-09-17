@@ -84,12 +84,45 @@ public class BDHelper extends SQLiteOpenHelper {
         return passwordArrayList;
     }
 
+    public ArrayList<Password> BuscarRegistros(String Consulta){
+        //ordenar
+        ArrayList<Password> passwordArrayList=new ArrayList<>();
+        //Este query buscara por titulo
+        String query="SELECT * FROM "+Constants.TABLE_NAME+" WHERE "+Constants.C_TITULO+ " LIKE '%"+Consulta+"%'";
+        SQLiteDatabase db=this.getReadableDatabase();
+        //cursor
+        Cursor cursor=db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                @SuppressLint("Range") Password modelo_password=new Password(
+                        ""+cursor.getInt(cursor.getColumnIndex(Constants.C_ID)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_TITULO)),
+                        "" +cursor.getString(cursor.getColumnIndex(Constants.C_CUENTA)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_Nombre_USUARIO)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_PASSWORD)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_SITIO_WEB)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_NOTA)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_TIEMPO_REGISTRO)),
+                        ""+cursor.getString(cursor.getColumnIndex(Constants.C_TIEMPO_ACTUALIZACION))
+                );
+
+
+                passwordArrayList.add(modelo_password);
+            }while ( cursor.moveToNext());
+
+        }
+        db.close();
+        return passwordArrayList;
+    }
+
     public int ObtenerCantidadRegistros(){
         String query="SELECT * FROM "+Constants.TABLE_NAME;
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.rawQuery(query,null);
         int cantidad=cursor.getCount();
         cursor.close();
+        db.close();
         return cantidad;
 
     }
